@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List App</title>
+  </head>
+  <body>
+    <form action="/add" method="post">
+      <input type="text" name="todo" />
+      <button type="submit">Add</button>
+    </form>
+
+    <hr />
+
+    <ul id="list">
+      <p>Todo list is empty</p>
+    </ul>
+
+    <script>
+      async function load() {
+        const res = await fetch("/list");
+        const todos = await res.json();
+        console.log(todos);
+
+        document.getElementById("list").innerHTML = todos
+          .map(
+            (todo) => `
+          <li>
+            ${todo.text} &middot; <a href="/delete?id=${todo.id}">delete</a>
+          </li>
+        `
+          )
+          .join("");
+      }
+
+      load();
+    </script>
+  </body>
+</html>
