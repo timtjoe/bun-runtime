@@ -19,6 +19,24 @@
     </ul>
 
     <script>
+      async function load() {
+        const res = await fetch("/api/list");
+        const todos = await res.json();
+        document.getElementById("list").innerHTML = todos
+          .map(
+            (task) => `
+        <li>
+          <p>
+            ${task.task} &middot; 
+            <a href="/api/delete?id=${task.id}">delete</a>
+            </p>
+        </li>
+        `
+          )
+          .join("");
+      }
+
+      load();
     </script>
   </body>
 </html>
