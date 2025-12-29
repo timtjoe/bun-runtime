@@ -1,5 +1,5 @@
 {
-  "name": "todos",
+  "name": "helloworld",
   "module": "index.ts",
   "type": "module",
   "private": true,
