@@ -11,13 +11,13 @@
         <form action="/api/create" method="post">
             <input
                 type="text"
-                name="todo"
-                id="todo"
+                name="task"
+                id="task"
                 placeholder="Add new task..."
             />
             <button type="submit">Add</button>
         </form>
-        <ul>
+        <ul id="list">
             <li>
                 <p>
                     This is a task &middot;
@@ -51,6 +51,22 @@
                 .addEventListener("click", () => {
                     dialog.close();
                 });
+            
+            async function load() {
+              const res = await fetch("/api/all");
+              const todos = await res.json();
+              document.getElementById("list").innerHTML = todos.map(task => `
+                <li>
+                    <p>
+                        ${task.task} &middot;
+                        <a href="/api/delete?id=${task.id}">delete</a>
+                        &middot;
+                        <button id="openButton">edit</button>
+                    </p>
+                </li>
+                `).join("")
+            }
+            load()
         </script>
     </body>
 </html>
