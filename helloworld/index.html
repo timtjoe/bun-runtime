@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>TODO LIST APP</title>
+    </head>
+    <body>
+        <h1>Todo list app</h1>
+        <hr />
+        <form action="/api/create" method="post">
+            <input
+                type="text"
+                name="todo"
+                id="todo"
+                placeholder="Add new task..."
+            />
+            <button type="submit">Add</button>
+        </form>
+        <ul>
+            <li>
+                <p>
+                    This is a task &middot;
+                    <a href="/api/delete">delete</a>
+                    &middot;
+                    <button id="openButton">edit</button>
+                </p>
+            </li>
+        </ul>
+
+        <dialog>
+            <p>Edit task</p>
+            <form action="/api/edit" method="post">
+                <input type="text" id="edit" name="edit" value="edit" />
+                <button type="submit">Save</button>
+            </form>
+            <button id="closeButton">cancel</button>
+        </dialog>
+
+        <script>
+            const dialog = document.querySelector("dialog");
+            const openButton = document
+                .getElementById("openButton")
+                .addEventListener("click", () => {
+                  
+                    dialog.showModal();
+                });
+
+            document
+                .getElementById("closeButton")
+                .addEventListener("click", () => {
+                    dialog.close();
+                });
+        </script>
+    </body>
+</html>
